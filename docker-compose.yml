@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+    db:
+        image: 'postgres:15.0-bullseye'
+        restart: unless-stopped
+        container_name: crypto_exchange
+        ports:
+            -   '5432:5432'
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - ./storage/_db:/var/lib/postgresql/data
+        networks:
+            - crypto-exchange-network
+
+networks:
+    crypto-exchange-network:
